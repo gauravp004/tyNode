@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 import moment from 'moment'
 
-import { white, opacity1, black, primary, blue1, blue6, orange1, blue2 } from '../../../common/color'
+import { white, opacity1, black, primary, blue1, blue6, orange1, blue2 } from '../../../config/common'
 
 class listing extends React.Component {
     constructor(props) {
@@ -111,7 +111,7 @@ class listing extends React.Component {
         fontSize: '0.75rem',
         lineHeight: 2,
         letterSpacing: 'normal',
-        boxShadow: `0 1px 1px ${ opacity1 }`
+        boxShadow: `0 1px 1px ${ opacity1(0.2) }`
     }
     styleStrong = {
         fontSize: '0.85rem',
@@ -151,7 +151,7 @@ class listing extends React.Component {
         background: blue2,
         borderRadius: '50%',
         padding: '20px',
-        boxShadow: `0 10px 10px ${ opacity1 }`
+        boxShadow: `0 10px 10px ${ opacity1(0.2) }`
     }
 }
 

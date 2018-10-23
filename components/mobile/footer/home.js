@@ -1,12 +1,12 @@
-import { primary, white, blue1, blue2, opacity1 } from '../../../config/common'
-import FbLogo from '../../utilities/sprites/fb'
-import TwitterLogo from '../../utilities/sprites/twitter'
-import InstaLogo from '../../utilities/sprites/instagram'
-import YoutubeLogo from '../../utilities/sprites/youtube'
-import GplusLogo from '../../utilities/sprites/gplus'
-import LinkedinLogo from '../../utilities/sprites/linkedin'
-import AppLogo from '../../utilities/sprites/playstore'
-import Logo from '../../utilities/sprites/logosmall'
+import { primary, white, blue1, blue2, opacity1, appLink, fbLink, twitterLink, instaLink, linkedinLink, gplusLink, youtubeLink } from '../../../config/common'
+import FbLogo from '../../utilities/img/fb'
+import TwitterLogo from '../../utilities/img/twitter'
+import InstaLogo from '../../utilities/img/instagram'
+import YoutubeLogo from '../../utilities/img/youtube'
+import GplusLogo from '../../utilities/img/gplus'
+import LinkedinLogo from '../../utilities/img/linkedin'
+import AppLogo from '../../utilities/img/playstore'
+import Logo from '../../utilities/img/logosmall'
 
 export default () => (
     <footer
@@ -19,7 +19,7 @@ export default () => (
         }}
     >
         <a
-            href = "https://play.google.com/store/apps/details?id=com.travelyaari"
+            href = { appLink }
             style = {{
                 width: 'calc(100% - 30px)',
                 padding: '15px 0',
@@ -33,25 +33,25 @@ export default () => (
             Download our app for latest updates
         </a>
         <div className = "flsbc" style = {{ width: '100%', padding: '20px 15px' }}>
-            <a href = "https://www.facebook.com/travelyaari" target = "_self">
+            <a href = { fbLink } target = "_self">
                 <FbLogo />
             </a>
-            <a href = "https://twitter.com/travelyaari" target = "_self">
+            <a href = { twitterLink } target = "_self">
                 <TwitterLogo />
             </a>
-            <a href = "https://www.instagram.com/Travelyaari_India/" target = "_self">
+            <a href = { instaLink } target = "_self">
                 <InstaLogo />
             </a>
-            <a href = "https://www.linkedin.com/company/travelyaari-com-mantis-technologies-pvt-ltd-" target = "_self">
+            <a href = { linkedinLink } target = "_self">
                 <LinkedinLogo />
             </a>
-            <a href = "https://plus.google.com/+travelyaari" target = "_self">
+            <a href = { gplusLink } target = "_self">
                 <GplusLogo />
             </a>
-            <a href = "https://www.youtube.com/channel/UCHKCrF8UrVGt-tI_CRa9zbg" target = "_self">
+            <a href = { youtubeLink } target = "_self">
                 <YoutubeLogo />
             </a>
-            <a href = "https://play.google.com/store/apps/details?id=com.travelyaari" target = "_self">
+            <a href = { appLink } target = "_self">
                 <AppLogo />
             </a>
         </div>

@@ -8,6 +8,7 @@ import HomeHead from '../components/mobile/headtag/home'
 import Header from '../components/mobile/header/home'
 import Banner from '../components/mobile/header/homebanner'
 import SearchPanel from '../components/mobile/searchpanel/searchpanel'
+import Seo from '../components/mobile/seo/home'
 import Footer from '../components/mobile/footer/home'
 
 export default connect()(() => (
@@ -16,6 +17,7 @@ export default connect()(() => (
         <Header />
         { showBanner && <Banner active = { 1 } /> }
         <SearchPanel />
+        <Seo />
         <Footer />
     </Wrapper>
 ))

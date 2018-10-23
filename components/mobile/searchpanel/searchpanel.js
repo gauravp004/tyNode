@@ -5,12 +5,13 @@ import { connect } from 'react-redux'
 import { getCityList, getSearchParams } from '../../../redux/actions/search-actions'
 
 import { httprequest_get } from '../../../common/utilities'
-import { primary, secondary, white, text1, text6, blue2 } from '../../../config/common'
+import { primary, white, text1, text6, blue2 } from '../../../config/common'
 
 import Loader from '../loader/loader'
 import Slider from '../slider/slider'
 import Autocomplete from '../autocomplete/autocomplete'
 import Datepicker from '../datepicker/datepicker'
+import Button from '../../utilities/others/button1'
 
 class searchPanel extends React.Component {
     constructor(props) {
@@ -39,8 +40,6 @@ class searchPanel extends React.Component {
         cityRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const cityList = JSON.parse(cityRequest.responseText).data
-                cityList && that.setState({ cityList })
-                // store.dispatch(getCityList(cityList))
                 const {dispatch} = that.props
                 dispatch(getCityList(cityList))
             }
@@ -48,14 +47,14 @@ class searchPanel extends React.Component {
     }
 
     searchBus = (e) => {
+        console.log('hi')
         this.setState({ showLoader: true })
         e.preventDefault()
         if (this.state.fromCity && this.state.toCity && this.state.departDate) {
-            const url = `/search/${this.state.fromCity}-to-${this.state.toCity}?departDate=${moment(this.state.departDate).format("DD-MM-YYYY")}`
+            const url = `/search/${ this.state.fromCity }-to-${ this.state.toCity }?departDate=${moment(this.state.departDate).format("DD-MM-YYYY")}`
             const {dispatch} = this.props
             dispatch(getSearchParams(this.state.fromCity, this.state.toCity, moment(this.state.departDate).format("YYYY-MM-DD")))
             Router.push("/search", url)
-            console.log(this.props)
         } else {
             alert("Please fill all the fields")
         }
@@ -91,26 +90,9 @@ class searchPanel extends React.Component {
                         top: 10px;
                         color: ${ text6 };
                         left: 15px;
-                        font-size: 16px;
-                    }
-                    button {
-                        width: 100%;
-                        height: 40px;
-                        border: 0;
-                        background: ${ secondary };
-                        padding: 8px 10px;
-                        font-size: 14pt;
-                        font-weight: 400;
-                        color: ${ white };
-                        outline: 0;
-                        border-radius: 3px;
-                        box-shadow: rgba(0,0,0,.16) 0 1px 2px 0;
-                        text-transform: uppercase;
+                        font-size: 1rem;
                     }
                     .next-day {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
                         position: absolute;
                         right: 0;
                         top: 0;
@@ -134,9 +116,9 @@ class searchPanel extends React.Component {
                     <div onClick = { () => this.setState({ departClass: 'slider bottom active' }) }>
                         <input type = "text" placeholder = "Select journey date" value = { this.state.showDate } readOnly />
                         <label>Date:</label>
-                        <span className = "next-day">NEXT DAY</span>
+                        <span className = "next-day flcc">NEXT DAY</span>
                     </div>
-                    <button type = "submit">Search bus</button>
+                    <Button type = "submit" height = "40px">Search bus</Button>
                 </form>
                 <Slider classes = { this.state.fromClass } >
                     {

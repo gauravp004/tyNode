@@ -4,6 +4,8 @@ import 'react-dates/lib/css/_datepicker.css'
 import moment from 'moment'
 
 import Custom from '../header/custom'
+import Button from '../../utilities/others/button1'
+import Footer from '../footer/bottom'
 import { primary, secondary, white, text6, opacity1, text1 } from '../../../config/common'
 
 export default class datepicker extends React.Component {
@@ -39,42 +41,8 @@ export default class datepicker extends React.Component {
                     .week-wrapper {
                         background: ${ primary };
                         color: ${ white };
-                        display: flex;
-                        justify-content: space-around;
                         padding: 15px;
                         margin-top: -1px;
-                    }
-                    .foot-wrapper {
-                        position: fixed;
-                        width: 100%;
-                        bottom: 0;
-                        left: 0;
-                        font-size: 0.75rem;
-                        background: ${ white };
-                        color: ${ text1 };
-                        padding: 15px;
-                        text-align: center;
-                        box-shadow: 0 -1px 5px ${ opacity1 };
-                        transform: translate(0, 0);
-                        transition: 0.5s ease transform;
-                    }
-                    .foot-wrapper.disabled {
-                        transform: translate(0, 100%);
-                    }
-                    .search-btn {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100%;
-                        height: 50px;
-                        background: ${ secondary };
-                        margin-top: 15px;
-                        font-size: 12pt;
-                        font-weight: 400;
-                        color: ${ white };
-                        border-radius: 3px;
-                        box-shadow: rgba(0,0,0,.16) 0 1px 2px 0;
-                        text-transform: uppercase;
                     }
                     .DayPicker {
                         height: calc(100vh - 103px);
@@ -120,7 +88,7 @@ export default class datepicker extends React.Component {
                     <span onClick = { this.props.onClose }>&#x2715;</span>
                     <div className = "head-wrapper">Journey date</div>
                 </Custom>
-                <div className = "week-wrapper">
+                <div className = "week-wrapper flsac">
                     <span>Mon</span>
                     <span>Tue</span>
                     <span>Wed</span>
@@ -140,10 +108,14 @@ export default class datepicker extends React.Component {
                     daySize = { Math.round(window.innerWidth / 7) - 3 }
                     isOutsideRange = { this.checkOutsideRange }
                 />
-                <div className = { this.props.from && this.props.to && this.state.showDate ? "foot-wrapper" : "foot-wrapper disabled"}>
+                <Footer
+                    active = { this.props.from && this.props.to && this.state.showDate }
+                    textAlign = "center"
+                    fontSize = "0.75rem"
+                >
                     <div>{ this.props.from } to { this.props.to } on { this.state.showDate } </div>
-                    <div onClick = { this.props.searchBus } className = "search-btn">Search bus</div>
-                </div>
+                    <Button onClick = { this.props.searchBus } margin = '15px auto 0'>Search bus</Button>
+                </Footer>
             </div>
         )
     }

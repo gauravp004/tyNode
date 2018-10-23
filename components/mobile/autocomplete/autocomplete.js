@@ -48,9 +48,6 @@ export default class autoComplete extends React.Component {
                         position: relative;
                         width: calc(100% - 30px);
                         height: 40px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
                     }
                     .srch-txt-wrapper label {
                         font-size: 0.7rem;
@@ -73,9 +70,9 @@ export default class autoComplete extends React.Component {
                         overflow: auto;
                     }
                 `}</style>
-                <Custom>
+                <Custom minHeight = "55px">
                     <span onClick = { this.props.onClose }>&#x2715;</span>
-                    <div className = "srch-txt-wrapper">
+                    <div className = "srch-txt-wrapper flcolsb">
                         <label>{ this.props.label }</label>
                         <input
                             type = "text"

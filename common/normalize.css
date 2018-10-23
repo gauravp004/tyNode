@@ -11,237 +11,237 @@
     focus-ring-color: rgba(0,0,0,0);
     resize: none;
     outline: 0;
-    }
+}
 
-    *:before, *:after {
+*:before, *:after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    }
+}
 
-    /* ==========================================================================
-    Base
-    ========================================================================== */
+/* ==========================================================================
+Base
+========================================================================== */
 
-    /**
-    * 2. Prevent iOS text size adjust after orientation change, without disabling
-    *    user zoom.
-    */
+/**
+* 2. Prevent iOS text size adjust after orientation change, without disabling
+*    user zoom.
+*/
 
-    html {
-        -webkit-text-size-adjust: 100%; /* 2 */
-    }
+html {
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
 
-    /**
-    * Remove default margin.
-    */
+/**
+* Remove default margin.
+*/
 
-    body {
-        margin: 0;
-        font-size: 16px;
-        font-family: sans-serif;
-        font-weight: 300;
-        color: #666;
-        letter-spacing: 0.03rem;
-        background: #f4f7f8;
-    }
+body {
+    margin: 0;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: #666;
+    letter-spacing: 0.03rem;
+    background: #f4f7f8;
+}
 
-    /* ==========================================================================
-    Links
-    ========================================================================== */
+/* ==========================================================================
+Links
+========================================================================== */
 
-    /**
-    * Address outline inconsistency between Chrome and other browsers.
-    */
+/**
+* Address outline inconsistency between Chrome and other browsers.
+*/
 
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-    a:focus {
-        outline: thin dotted;
-    }
+a:focus {
+    outline: thin dotted;
+}
 
-    /**
-    * Improve readability when focused and also mouse hovered in all browsers.
-    */
+/**
+* Improve readability when focused and also mouse hovered in all browsers.
+*/
 
-    a:active,
-    a:hover {
-        outline: 0;
-    }
+a:active,
+a:hover {
+    outline: 0;
+}
 
-    /* ==========================================================================
-    Typography
-    ========================================================================== */
+/* ==========================================================================
+Typography
+========================================================================== */
 
-    /**
-    * Address variable h1 font-size and margin within section and article
-    * contexts in Firefox 4+, Safari 5, and Chrome.
-    */
+/**
+* Address variable h1 font-size and margin within section and article
+* contexts in Firefox 4+, Safari 5, and Chrome.
+*/
 
-    h1 {
-        font-size: 2em;
-        margin: 0.67em 0;
-    }
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
 
-    /**
-    * Address style set to bolder in Firefox 4+, Safari 5, and Chrome.
-    */
+/**
+* Address style set to bolder in Firefox 4+, Safari 5, and Chrome.
+*/
 
-    b,
-    strong {
-        font-weight: bold;
-    }
+b,
+strong {
+    font-weight: bold;
+}
 
-    /**
-    * Address differences between Firefox and other browsers.
-    */
+/**
+* Address differences between Firefox and other browsers.
+*/
 
-    hr {
-        box-sizing: content-box;
-        height: 0;
-    }
+hr {
+    box-sizing: content-box;
+    height: 0;
+}
 
-    /**
-    * Address inconsistent and variable font size in all browsers.
-    */
+/**
+* Address inconsistent and variable font size in all browsers.
+*/
 
-    small {
-        font-size: 80%;
-    }
+small {
+    font-size: 80%;
+}
 
-    /**
-    * Prevent sub and sup affecting line-height in all browsers.
-    */
+/**
+* Prevent sub and sup affecting line-height in all browsers.
+*/
 
-    sub,
-    sup {
-        font-size: 75%;
-        line-height: 0;
-        position: relative;
-        vertical-align: baseline;
-    }
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
 
-    sup {
-        top: -0.5em;
-    }
+sup {
+    top: -0.5em;
+}
 
-    sub {
-        bottom: -0.25em;
-    }
+sub {
+    bottom: -0.25em;
+}
 
-    /* ==========================================================================
-    Forms
-    ========================================================================== */
+/* ==========================================================================
+Forms
+========================================================================== */
 
-    /**
-    * 2. Correct font size not being inherited in all browsers.
-    * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
-    */
+/**
+* 2. Correct font size not being inherited in all browsers.
+* 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+*/
 
-    button,
-    input,
-    select,
-    textarea {
-        font-size: 100%; /* 2 */
-        margin: 0; /* 3 */
-        font: inherit;
-    }
+button,
+input,
+select,
+textarea {
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+    font: inherit;
+}
 
-    /**
-    * Address inconsistent text-transform inheritance for button and select.
-    * All other form control elements do not inherit text-transform values.
-    * Correct button style inheritance in Chrome, Safari 5+, and IE 8+.
-    * Correct select style inheritance in Firefox 4+ and Opera.
-    */
+/**
+* Address inconsistent text-transform inheritance for button and select.
+* All other form control elements do not inherit text-transform values.
+* Correct button style inheritance in Chrome, Safari 5+, and IE 8+.
+* Correct select style inheritance in Firefox 4+ and Opera.
+*/
 
-    button,
-    select {
-        text-transform: none;
-    }
+button,
+select {
+    text-transform: none;
+}
 
-    /**
-    * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native audio
-    *    and video controls.
-    * 2. Correct inability to style clickable input types in iOS.
-    */
+/**
+* 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native audio
+*    and video controls.
+* 2. Correct inability to style clickable input types in iOS.
+*/
 
-    button,
-    html input[type="button"], /* 1 */
-    input[type="reset"],
-    input[type="submit"] {
-        -webkit-appearance: button; /* 2 */
-    }
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+}
 
-    /**
-    * 1. Address appearance set to searchfield in Safari 5 and Chrome.
-    * 2. Address box-sizing set to border-box in Safari 5 and Chrome
-    *    (include -moz to future-proof).
-    */
+/**
+* 1. Address appearance set to searchfield in Safari 5 and Chrome.
+* 2. Address box-sizing set to border-box in Safari 5 and Chrome
+*    (include -moz to future-proof).
+*/
 
-    input[type="search"] {
-        -webkit-appearance: textfield; /* 1 */
-        -webkit-box-sizing: content-box; /* 2 */
-        box-sizing: content-box;
-    }
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
 
-    /**
-    * Remove inner padding and search cancel button in Safari 5 and Chrome
-    * on OS X.
-    */
+/**
+* Remove inner padding and search cancel button in Safari 5 and Chrome
+* on OS X.
+*/
 
-    input[type="search"]::-webkit-search-cancel-button,
-    input[type="search"]::-webkit-search-decoration {
-        -webkit-appearance: none;
-    }
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
 
-    /* 
-        CUSTOM CSS BEGINS
-    */
+/* 
+    CUSTOM CSS BEGINS
+*/
 
-    .flcc {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.flcc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .flc {
-        display: flex;
-        align-items: center;
-    }
+.flc {
+    display: flex;
+    align-items: center;
+}
 
-    .flsac {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
+.flsac {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
-    .flsbc {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+.flsbc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .flcolc {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.flcolc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .flcolsb {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+.flcolsb {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    .elp {
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.elp {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-    .strike {
-        text-decoration: line-through;
-    }
+.strike {
+    text-decoration: line-through;
+}

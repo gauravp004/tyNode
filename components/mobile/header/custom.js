@@ -1,17 +1,14 @@
 import { primary, white } from '../../../config/common'
 
 const custom = (props) => (
-    <div className = { 'custom-head ' + props.classes }>
+    <div className = "flsbc custom-head" style = {{ ...props.style }}>
         <style jsx>{`
             .custom-head {
-                position: relative;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background: ${ primary };
-                padding: 0 15px;
-                min-height: 55px;
-                color: ${ white };
+                position: ${ props.position || 'relative' };
+                background: ${ props.background || primary };
+                padding: ${ props.padding || '0 15px' };
+                min-height: ${ props.minHeight || '50px' };
+                color: ${ props.color || white };
             }
         `}</style>
         { props.children }

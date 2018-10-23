@@ -8,7 +8,7 @@ import Loader from '../components/mobile/loader/loader'
 import Header from '../components/mobile/header/seatchart'
 
 import '../common/normalize.css'
-import { white, primary, text3, light2, opacity1, text6 } from '../common/color';
+import { white, primary, text3, light2, opacity1, text6 } from '../config/common';
 
 let 
     rD,

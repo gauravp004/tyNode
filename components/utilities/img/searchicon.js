@@ -1,0 +1,1 @@
+export default (props) => <img src="/static/img/search-icon.png" onClick = { props.onClick } />

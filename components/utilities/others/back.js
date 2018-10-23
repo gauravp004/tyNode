@@ -4,7 +4,7 @@ export default (props) => (
             .ty-back {
                 position: relative;
             }
-            .ty-back span {
+            span {
                 display: inline-block;
                 height: 2px;
                 width: 10px;

@@ -1,4 +1,4 @@
-import { primary, opacity4 } from '../../../config/common'
+import { primary, opacity2 } from '../../../config/common'
 
 export default () => (
     <div className = 'loading'>
@@ -25,7 +25,7 @@ export default () => (
                 justify-content: center;
                 align-items: center;
                 transition: 0.3s ease-in-out;
-                background: ${ opacity4 };
+                background: ${ opacity2(0.8) };
             }
             
             .loading span {

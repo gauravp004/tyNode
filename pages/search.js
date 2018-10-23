@@ -1,4 +1,7 @@
 import { connect } from 'react-redux'
+
+import Wrapper from '../components/mobile/wrapper'
+
 import moment from 'moment'
 import { httprequest_get, getQueryParams } from '../common/utilities'
 import { getSearchParams, getSearchResult } from '../redux/actions/search-actions'
@@ -8,11 +11,9 @@ import Loader from '../components/mobile/loader/loader'
 import Header from '../components/mobile/header/srp'
 import Listing from '../components/mobile/listing/listing'
 
-import '../common/normalize.css'
-
 class search extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             showLoader: true,
             showSearch: false,
@@ -29,7 +30,7 @@ class search extends React.Component {
             this.getSearchList()
         } else {
             const tempDt = getQueryParams().departDate ? getQueryParams().departDate.split('-') : false
-            const journeyDate = tempDt[2] + '-' + tempDt[1] + '-' + tempDt[0];
+            const journeyDate = tempDt[2] + '-' + tempDt[1] + '-' + tempDt[0]
             const searchParams = pt.split('/search/').length > 1 ? pt.split('/search/')[1].split('-to-') : false
             
             if (searchParams && tempDt) {
@@ -53,7 +54,7 @@ class search extends React.Component {
     getSearchList = () => {
         const that = this
         const srch = this.props.search
-        const searchReq = httprequest_get(`https://api.iamgds.com/api/Search?fromCity=${srch.from}&toCity=${srch.to}&journeyDate=${srch.journeyDate}`, true)
+        const searchReq = httprequest_get(`https://api.iamgds.com/api/Search?fromCity=${ srch.from }&toCity=${ srch.to }&journeyDate=${srch.journeyDate}`, true)
 
         searchReq.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -70,7 +71,7 @@ class search extends React.Component {
     
     render() {
         return (
-            <div>
+            <Wrapper>
                 { this.state.showLoader && <Loader /> }
                 <HomeHead />
                 <Header 
@@ -84,14 +85,14 @@ class search extends React.Component {
                     this.props.search.buses.length > 0 && 
                     <Listing modifyOpen = {this.state.showSearch} />
                 }
-            </div>
+            </Wrapper>
         )
     }
     
 }
 
 const mapStateToProps = function(store) {
-    return (store);
-};
+    return (store)
+}
 
 export default connect(mapStateToProps)(search)

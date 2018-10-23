@@ -1,7 +1,7 @@
 import { text1, white, opacity1 } from '../../../config/common'
 import BurgerMenu from '../../utilities/others/burger'
-import LogoImg from '../../utilities/sprites/logo'
-import OfferImg from '../../utilities/sprites/offer'
+import LogoImg from '../../utilities/img/logo'
+import OfferImg from '../../utilities/img/offer'
 
 export default () => (
     <header style = {{ paddingTop: '50px' }}>

@@ -1,8 +1,9 @@
-import { white, opacity1, primary, blue1 } from '../../../common/color'
-import Back from '../../utilities/back'
+import { white, opacity1, primary, blue1 } from '../../../config/common'
+import Back from '../../utilities/others/back'
 import Slider from '../slider/slider2'
 import SearchPanel from '../searchpanel/searchpanel'
 import Sort from '../listing/sort'
+import SearchIcon from '../../utilities/img/searchicon'
 
 export default (props) => (
     <header className = "flcolc">
@@ -13,7 +14,7 @@ export default (props) => (
                 padding: 10px 0 0;
                 background: ${ primary };
                 color: ${ white };
-                box-shadow: 0 1px 15px 0 ${ opacity1 };
+                box-shadow: 0 1px 15px 0 ${ opacity1(0.2) };
                 z-index: 999;
             }
             header>div {
@@ -22,7 +23,7 @@ export default (props) => (
                 background: ${ blue1 };
                 padding: 15px;
                 border-radius: 3px;
-                box-shadow: 0 0 1px 0 ${ opacity1 };
+                box-shadow: 0 0 1px 0 ${ opacity1(0.2) };
             }
             .txt-wrapper {
                 width: calc(100% - 50px);
@@ -57,7 +58,7 @@ export default (props) => (
             <div className = "flcc txt-wrapper" onClick = { props.onClick }>
                 <span>{ props.from }</span>&nbsp;to&nbsp;<span>{ props.to }</span>&nbsp;on { props.journeyDate }
             </div>
-            <img src="/static/img/search-icon.png" onClick = { props.onClick } />
+            <SearchIcon onClick = { props.onClick } />
         </div>
         <Slider active = { props.showSearch } height = "220px">
             <SearchPanel />

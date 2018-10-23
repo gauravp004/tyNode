@@ -1,4 +1,4 @@
-import { white, opacity1, primary, blue1 } from '../../../common/color'
+import { white, opacity1, primary, blue1 } from '../../../config/common'
 import Back from '../../utilities/back'
 import Slider from '../slider/slider2'
 
@@ -11,7 +11,7 @@ export default (props) => (
                 padding: 10px 0;
                 background: ${ primary };
                 color: ${ white };
-                // box-shadow: 0 1px 15px 0 ${ opacity1 };
+                // box-shadow: 0 1px 15px 0 ${ opacity1(0.2) };
                 z-index: 999;
             }
             header>div {
@@ -20,7 +20,7 @@ export default (props) => (
                 background: ${ blue1 };
                 padding: 15px;
                 border-radius: 3px;
-                box-shadow: 0 0 1px 0 ${ opacity1 };
+                box-shadow: 0 0 1px 0 ${ opacity1(0.2) };
             }
             .txt-wrapper {
                 width: calc(100% - 50px);

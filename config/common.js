@@ -37,9 +37,7 @@ export const other1 = '#ccdeea'
 export const other2 = '#3c77ff'
 
 export const opacity1 = (val = 0.2) => `rgba(0, 0, 0, ${ val })`
-export const opacity2 = 'rgba(0, 0, 0, 0.8)'
-export const opacity3 = (val = 0.2) => `rgba(255, 255, 255, ${ val })`
-export const opacity4 = 'rgba(255, 255, 255, 0.8)'
+export const opacity2 = (val = 0.2) => `rgba(255, 255, 255, ${ val })`
 
 // other constants
 export const appLink = 'https://play.google.com/store/apps/details?id=com.travelyaari'
@@ -49,7 +47,6 @@ export const instaLink = 'https://www.instagram.com/Travelyaari_India/'
 export const linkedinLink = 'https://www.linkedin.com/company/travelyaari-com-mantis-technologies-pvt-ltd-'
 export const gplusLink = 'https://plus.google.com/+travelyaari'
 export const youtubeLink = 'https://www.youtube.com/channel/UCHKCrF8UrVGt-tI_CRa9zbg'
-
 
 // style
 export const body = {
