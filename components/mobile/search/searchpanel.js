@@ -7,7 +7,7 @@ import { getCityList, getSearchParams } from '../../../redux/actions/search-acti
 import { httprequest_get } from '../../../common/utilities'
 import { primary, white, text1, text6, blue2 } from '../../../config/common'
 
-import Loader from '../loader/loader'
+import Loader from '../../utilities/loader/loader'
 import Slider from '../slider/slider'
 import Autocomplete from '../autocomplete/autocomplete'
 import Datepicker from '../datepicker/datepicker'
@@ -47,24 +47,26 @@ class searchPanel extends React.Component {
     }
 
     searchBus = (e) => {
-        console.log('hi')
-        this.setState({ showLoader: true })
         e.preventDefault()
         if (this.state.fromCity && this.state.toCity && this.state.departDate) {
             const url = `/search/${ this.state.fromCity }-to-${ this.state.toCity }?departDate=${moment(this.state.departDate).format("DD-MM-YYYY")}`
-            const {dispatch} = this.props
-            dispatch(getSearchParams(this.state.fromCity, this.state.toCity, moment(this.state.departDate).format("YYYY-MM-DD")))
+            // const { dispatch } = this.props
+            this.props.dispatch(
+                getSearchParams(
+                    this.state.fromCity,
+                    this.state.toCity,
+                    moment(this.state.departDate).format("YYYY-MM-DD")
+                )
+            )
             Router.push("/search", url)
         } else {
             alert("Please fill all the fields")
         }
-        this.setState({ showLoader: false })
     }
 
     render() {
         return (
             <div>
-                { this.state.showLoader && <Loader /> }
                 <style jsx>{`
                     .srch-form {
                         background: ${ primary };

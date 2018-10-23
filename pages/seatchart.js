@@ -4,11 +4,11 @@ import { httprequest_get, getQueryParams } from '../common/utilities'
 import { getSeatchart, updateSeatSel, resetSeatchart } from '../redux/actions/seatchart-actions'
 // Head tag for search page
 import HomeHead from '../components/mobile/headtag/srp'
-import Loader from '../components/mobile/loader/loader'
+import Loader from '../components/utilities/loader/loader'
 import Header from '../components/mobile/header/seatchart'
 
 import '../common/normalize.css'
-import { white, primary, text3, light2, opacity1, text6 } from '../config/common';
+import { white, primary, text3, opacity1, text6 } from '../config/common';
 
 let 
     rD,
@@ -93,7 +93,7 @@ class seatchart extends React.Component {
                             width: 100%;
                             white-space: nowrap;
                             overflow-x: auto;
-                            box-shadow: 0 1px 15px 0 ${ opacity1 };
+                            box-shadow: 0 1px 15px 0 ${ opacity1(0.2) };
                         }
                         .fare-filter {
                             padding: 10px;
@@ -135,7 +135,7 @@ class seatchart extends React.Component {
                         width: calc(100% - 30px);
                         background: ${ white };
                         margin: 15px auto;
-                        box-shadow: 0 0 5px ${ opacity1 };
+                        box-shadow: 0 0 5px ${ opacity1(0.2) };
                         border-radius: 3px;
                     }
                     .layout-btn {

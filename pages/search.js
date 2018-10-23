@@ -7,9 +7,9 @@ import { httprequest_get, getQueryParams } from '../common/utilities'
 import { getSearchParams, getSearchResult } from '../redux/actions/search-actions'
 // Head tag for search page
 import HomeHead from '../components/mobile/headtag/srp'
-import Loader from '../components/mobile/loader/loader'
+import Loader from '../components/utilities/loader/loader'
 import Header from '../components/mobile/header/srp'
-import Listing from '../components/mobile/listing/listing'
+import Listing from '../components/mobile/search/listing'
 
 class search extends React.Component {
     constructor(props) {

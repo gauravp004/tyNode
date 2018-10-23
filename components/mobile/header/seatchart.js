@@ -1,5 +1,5 @@
 import { white, opacity1, primary, blue1 } from '../../../config/common'
-import Back from '../../utilities/back'
+import Back from '../../utilities/others/back'
 import Slider from '../slider/slider2'
 
 export default (props) => (

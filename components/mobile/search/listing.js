@@ -9,10 +9,6 @@ class listing extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-        console.log(this.props.search)
-    }
-
     showAmenities = (val) => {
         const amenities = this.props.search.data.AllAmenities
         return(

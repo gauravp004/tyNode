@@ -24,7 +24,6 @@ export default class datepicker extends React.Component {
     }
 
     onDateChange = (val) => {
-        console.log(val)
         const showDate = moment(val).format("ddd MMM DD YYYY")
         this.setState({ showDate })
         this.props.onSelect(val, showDate)

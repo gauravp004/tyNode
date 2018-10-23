@@ -1,8 +1,8 @@
 import { white, opacity1, primary, blue1 } from '../../../config/common'
 import Back from '../../utilities/others/back'
 import Slider from '../slider/slider2'
-import SearchPanel from '../searchpanel/searchpanel'
-import Sort from '../listing/sort'
+import SearchPanel from '../search/searchpanel'
+import Sort from '../search/sort'
 import SearchIcon from '../../utilities/img/searchicon'
 
 export default (props) => (

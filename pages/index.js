@@ -7,7 +7,7 @@ import HomeHead from '../components/mobile/headtag/home'
 
 import Header from '../components/mobile/header/home'
 import Banner from '../components/mobile/header/homebanner'
-import SearchPanel from '../components/mobile/searchpanel/searchpanel'
+import SearchPanel from '../components/mobile/search/searchpanel'
 import Seo from '../components/mobile/seo/home'
 import Footer from '../components/mobile/footer/home'
 
