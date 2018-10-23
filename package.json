@@ -1,0 +1,25 @@
+{
+  "name": "mynode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "express": "^4.16.4",
+    "moment": "^2.22.2",
+    "next": "^7.0.2",
+    "react": "^16.5.2",
+    "react-dates": "^18.1.1",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.1"
+  }
+}
