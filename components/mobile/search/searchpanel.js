@@ -1,13 +1,12 @@
-import Router from 'next/router'
 import React from 'react'
+import Router from 'next/router'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { getCityList, getSearchParams } from '../../../redux/actions/search-actions'
 
 import { httprequest_get } from '../../../common/utilities'
+import { getCityList, getSearchParams } from '../../../redux/actions/search-actions'
 import { primary, white, text1, text6, blue2 } from '../../../config/common'
 
-import Loader from '../../utilities/loader/loader'
 import Slider from '../slider/slider'
 import Autocomplete from '../autocomplete/autocomplete'
 import Datepicker from '../datepicker/datepicker'
@@ -19,12 +18,12 @@ class searchPanel extends React.Component {
         this.state = {
             showLoader: false,
             fromCity : '',
-            fromClass: 'slider bottom',
+            fromActive: false,
             toCity : '',
-            toClass: 'slider bottom',
+            toActive: false,
             departDate : '',
             showDate : '',
-            departClass: 'slider bottom'
+            departActive: false
         }
     }
 
@@ -37,6 +36,7 @@ class searchPanel extends React.Component {
     getCityList = () => {
         const that = this
         const cityRequest = httprequest_get("https://api.iamgds.com/api/CityList", true)
+
         cityRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const cityList = JSON.parse(cityRequest.responseText).data
@@ -48,9 +48,10 @@ class searchPanel extends React.Component {
 
     searchBus = (e) => {
         e.preventDefault()
+        
         if (this.state.fromCity && this.state.toCity && this.state.departDate) {
             const url = `/search/${ this.state.fromCity }-to-${ this.state.toCity }?departDate=${moment(this.state.departDate).format("DD-MM-YYYY")}`
-            // const { dispatch } = this.props
+            
             this.props.dispatch(
                 getSearchParams(
                     this.state.fromCity,
@@ -106,57 +107,78 @@ class searchPanel extends React.Component {
                         text-align: center;
                     }
                 `}</style>
-                <form onSubmit = { this.searchBus } className = "srch-form">
-                    <div onClick = { () => this.setState({ fromClass: 'slider bottom active' }) }>
-                        <input type = "text" placeholder = "Starting city" value = { this.state.fromCity } readOnly />
+                <form
+                    onSubmit = { this.searchBus }
+                    className = "srch-form"
+                >
+                    <div onClick = { () => this.setState({ fromActive: true }) }>
+                        <input
+                            type = "text"
+                            placeholder = "Starting city"
+                            value = { this.state.fromCity }
+                            readOnly
+                        />
                         <label>From:</label>
                     </div>
-                    <div onClick = { () => this.setState({ toClass: 'slider bottom active' }) }>
-                        <input type = "text" placeholder = "Destination city" value = { this.state.toCity } readOnly />
+                    <div onClick = { () => this.setState({ toActive: true }) }>
+                        <input
+                            type = "text"
+                            placeholder = "Destination city"
+                            value = { this.state.toCity }
+                            readOnly
+                        />
                         <label>To:</label>
                     </div>
-                    <div onClick = { () => this.setState({ departClass: 'slider bottom active' }) }>
-                        <input type = "text" placeholder = "Select journey date" value = { this.state.showDate } readOnly />
+                    <div onClick = { () => this.setState({ departActive: true }) }>
+                        <input
+                            type = "text"
+                            placeholder = "Select journey date"
+                            value = { this.state.showDate }
+                            readOnly
+                        />
                         <label>Date:</label>
                         <span className = "next-day flcc">NEXT DAY</span>
                     </div>
-                    <Button type = "submit" height = "40px">Search bus</Button>
+                    <Button
+                        type = "submit"
+                        height = "40px"
+                    >Search bus</Button>
                 </form>
-                <Slider classes = { this.state.fromClass } >
+                <Slider active = { this.state.fromActive } direction = "bottom">
                     {
-                        this.state.fromClass === 'slider bottom active' &&
+                        this.state.fromActive &&
                         <Autocomplete
                             list = { this.props.search.cityList }
-                            onSelect = { (sel) => this.setState({ fromCity: sel, toClass: 'slider bottom active' }) }
+                            onSelect = { (sel) => this.setState({ fromCity: sel, toActive: true }) }
                             selValue = { this.state.fromCity }
                             label = 'From city'
                             placeholder = 'Starting city'
-                            onClose = { () => this.setState({ fromClass: 'slider bottom' }) }
+                            onClose = { () => this.setState({ fromActive: false }) }
                         />
                     }
                 </Slider>
-                <Slider classes = { this.state.toClass } >
+                <Slider active = { this.state.toActive } direction = "bottom">
                     {
-                        this.state.toClass === 'slider bottom active' &&
+                        this.state.toActive &&
                         <Autocomplete
                             list = { this.props.search.cityList }
-                            onSelect = { (sel) => this.setState({ toCity: sel, departClass: 'slider bottom active' }) }
+                            onSelect = { (sel) => this.setState({ toCity: sel, departActive: true }) }
                             selValue = { this.state.toCity }
                             label = 'To city'
                             placeholder = 'Destination city'
-                            onClose = { () => this.setState({ toClass: 'slider bottom' }) }
+                            onClose = { () => this.setState({ toActive: false }) }
                         />
                     }
                 </Slider>
-                <Slider classes = { this.state.departClass } >
+                <Slider active = { this.state.departActive } direction = "bottom">
                     {
-                        this.state.departClass === 'slider bottom active' &&
+                        this.state.departActive &&
                         <Datepicker
                             from = { this.state.fromCity }
                             to = { this.state.toCity }
-                            date = { this.state.showDate }
+                            date = { this.props.search.data.JourneyDate || this.state.showDate }
                             onSelect = { (departDate, showDate) => this.setState({ departDate, showDate }) }
-                            onClose = { () => this.setState({ departClass: 'slider bottom' }) }
+                            onClose = { () => this.setState({ departActive: false }) }
                             searchBus = { this.searchBus }
                         />
                     }

@@ -6,15 +6,17 @@ import moment from 'moment'
 import Custom from '../header/custom'
 import Button from '../../utilities/others/button1'
 import Footer from '../footer/bottom'
-import { primary, secondary, white, text6, opacity1, text1 } from '../../../config/common'
+import Close from '../../utilities/others/close'
+import { primary, white, text6 } from '../../../config/common'
 
 export default class datepicker extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selDate : null,
+            selDate : this.props.date ? moment(new Date(this.props.date)) : null,
             showDate: this.props.date
         }
+        console.log(this.props)
     }
 
     checkOutsideRange = (e) => {
@@ -70,10 +72,7 @@ export default class datepicker extends React.Component {
                     .CalendarMonth_caption strong {
                         font-weight: 400;
                     }
-                    .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
-                        background: transparent;
-                    }
-                    .CalendarDay__default:hover {
+                    .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover, .CalendarDay__default:hover {
                         background: ${ primary };
                         color: ${ white };
                     }
@@ -84,7 +83,7 @@ export default class datepicker extends React.Component {
                     }
                 `}</style>
                 <Custom>
-                    <span onClick = { this.props.onClose }>&#x2715;</span>
+                    <Close onClick = { this.props.onClose } />
                     <div className = "head-wrapper">Journey date</div>
                 </Custom>
                 <div className = "week-wrapper flsac">

@@ -1,11 +1,43 @@
-export const header = {
-    navBar: [
-        {
-            label: '',
-            link: ''
-        }
-    ]
-}
+import Tysure from '../../components/utilities/others/tysure'
+
+export const navBar = [
+    [{
+        label: 'My bookings',
+        link: '/accounts/booking'
+    }],
+    [{
+        label: 'Download our app',
+        link: 'https://play.google.com/store/apps/details?id=com.travelyaari'
+    }],
+    [{
+        label: 'Customer care',
+        link: '/contact-us'
+    },
+    {
+        label: 'Call us at 1800-103-4482',
+        link: 'tel:18001034482'
+    }],
+    [{
+        label: <Tysure>-Assured travel</Tysure>,
+        link: '/ty-sure'
+    },
+    {
+        label: 'Terms & conditions',
+        link: '/terms-conditions'
+    },
+    {
+        label: 'Privacy policy',
+        link: '/privacy-policy'
+    }],
+    [{
+        label: 'About Travelyaari',
+        link: '/about-us'
+    },
+    {
+        label: 'Office Address',
+        link: '/office-address'
+    }]
+]
 
 export const showBanner = false
 

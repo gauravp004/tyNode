@@ -85,15 +85,8 @@ class listing extends React.Component {
     
     render() {
         return (
-            <div style = {
-                this.props.modifyOpen ? 
-                { height: 'calc(100vh - 315px)', overflowY: 'auto' } : 
-                { height: 'calc(100vh - 103px)', overflowY: 'auto' }
-            }>
+            <div>
                 { this.showBusList() }
-                <div className = "flcc" style = { this.styleFilter }>
-                    <img src = "/static/img/filter.svg" height = "23" />
-                </div>
             </div>
         )
     }
@@ -139,15 +132,6 @@ class listing extends React.Component {
         background: orange1,
         color: white,
         padding: '1px'
-    }
-    styleFilter = {
-        position: 'fixed',
-        bottom: '40px',
-        right: '15px',
-        background: blue2,
-        borderRadius: '50%',
-        padding: '20px',
-        boxShadow: `0 10px 10px ${ opacity1(0.2) }`
     }
 }
 

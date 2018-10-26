@@ -15,7 +15,8 @@ export default () => (
             textAlign: 'center',
             background: primary,
             color: white,
-            boxShadow: `0 1px 15px ${ opacity1(0.2) }`
+            marginTop: '25px',
+            boxShadow: `0 -1px 15px ${ opacity1(0.2) }`
         }}
     >
         <a
@@ -57,6 +58,7 @@ export default () => (
         </div>
         <div
             style = {{
+                width: '100%',
                 fontSize: '0.75rem',
                 padding: '20px 15px',
                 borderTop: `1px solid ${ blue2 }`

@@ -6,10 +6,16 @@ import Sort from '../search/sort'
 import SearchIcon from '../../utilities/img/searchicon'
 
 export default (props) => (
-    <header className = "flcolc">
+    <header>
         <style jsx>{`
             header {
-                position: relative;
+                padding-top: ${ props.showSearch ? '323px': '103px'};
+                transition: 0.6s ease;
+            }
+            .flcolc {
+                position: fixed;
+                left: 0;
+                top: 0;
                 width: 100%;
                 padding: 10px 0 0;
                 background: ${ primary };
@@ -17,7 +23,7 @@ export default (props) => (
                 box-shadow: 0 1px 15px 0 ${ opacity1(0.2) };
                 z-index: 999;
             }
-            header>div {
+            .flsbc {
                 width: calc(100% - 30px);
                 margin: auto;
                 background: ${ blue1 };
@@ -50,19 +56,21 @@ export default (props) => (
                 }
             }
         `}</style>
-        <div className = "flsbc">
-            <Back
-                color = { white }
-                onClick = { () => window.history.back() }
-            />
-            <div className = "flcc txt-wrapper" onClick = { props.onClick }>
-                <span>{ props.from }</span>&nbsp;to&nbsp;<span>{ props.to }</span>&nbsp;on { props.journeyDate }
+        <div className = "flcolc">
+            <div className = "flsbc">
+                <Back
+                    color = { white }
+                    onClick = { () => window.history.back() }
+                />
+                <div className = "flcc txt-wrapper" onClick = { props.onClick }>
+                    <span>{ props.from }</span>&nbsp;to&nbsp;<span>{ props.to }</span>&nbsp;on { props.journeyDate }
+                </div>
+                <SearchIcon onClick = { props.onClick } />
             </div>
-            <SearchIcon onClick = { props.onClick } />
+            <Slider active = { props.showSearch } height = "220px">
+                <SearchPanel />
+            </Slider>
+            <Sort />
         </div>
-        <Slider active = { props.showSearch } height = "220px">
-            <SearchPanel />
-        </Slider>
-        <Sort />
     </header>
 )

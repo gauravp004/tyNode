@@ -2,6 +2,7 @@ import React from 'react'
 
 import Custom from '../header/custom'
 import Radio from '../../utilities/inputs/radio'
+import Close from '../../utilities/others/close'
 import { white, other1 } from '../../../config/common'
 
 const popularList = ['Pune', 'Delhi', 'Nagpur', 'Mumbai', 'Ludhiana',  'Ahmedabad', 'Chandigarh', 'Jalandhar', 'Indore', 'Bengaluru', 'Hyderabad', 'Aurangabad, Maharashtra', 'Jaipur', 'Latur', 'Chennai', 'Nanded', 'Amravati', 'Kolhapur', 'Surat', 'Bangalore', 'Nashik', 'New Delhi', 'Vadodara', 'Kanpur', 'Amritsar', 'Lucknow', 'Raipur, Chhattisgarh', 'Udaipur, Rajasthan', 'Dhule', 'Jodhpur', 'Goa'];
@@ -71,7 +72,7 @@ export default class autoComplete extends React.Component {
                     }
                 `}</style>
                 <Custom minHeight = "55px">
-                    <span onClick = { this.props.onClose }>&#x2715;</span>
+                    <Close onClick = { this.props.onClose } />
                     <div className = "srch-txt-wrapper flcolsb">
                         <label>{ this.props.label }</label>
                         <input

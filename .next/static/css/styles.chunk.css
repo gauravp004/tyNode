@@ -245,6 +245,11 @@ input[type="search"]::-webkit-search-decoration {
 .strike {
     text-decoration: line-through;
 }
+
+.scroll-hide::-webkit-scrollbar {
+    width: 0!important;
+    height: 0!important;
+}
 .PresetDateRangePicker_panel {
   padding: 0 22px 11px
 }

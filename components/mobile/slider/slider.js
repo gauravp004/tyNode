@@ -1,17 +1,17 @@
 import { white } from '../../../config/common'
 
 const slider = (props) => (
-    <div className = { props.classes }>
+    <div className = { 'slider ' + props.direction + (props.active ? ' active': '') }>
         <style jsx>{`
             .slider {
                 position: fixed;
                 top: 0;
-                width: 100%;
-                height: 100%;
+                width: ${ props.width || '100%' };
+                height: ${ props.height || '100%' };
                 opacity: 0;
-                z-index: 999;
+                z-index: ${ props.zIndex || 1000 };
                 transition: 0.6s ease;
-                background: ${ white };
+                background: ${ props.background || white };
             }
             .slider.left {
                 transform: translate(-100%, 0);
