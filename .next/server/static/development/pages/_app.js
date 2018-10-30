@@ -167,7 +167,7 @@ function (_App) {
 /*!***************************************!*\
   !*** ./redux/actions/action-types.js ***!
   \***************************************/
-/*! exports provided: GET_CITY_LIST, GET_SEARCH_PARAMS, GET_SEARCH_SUCCESS, GET_SEATCHART_SUCCESS, UPDATE_SEAT_SELECTED, RESET_SEATCHART, GET_CHECKOUT_SUCCESS */
+/*! exports provided: GET_CITY_LIST, GET_SEARCH_PARAMS, GET_SEARCH_SUCCESS, UPDATE_SEARCH_BUSES, GET_SEATCHART_SUCCESS, UPDATE_SEAT_SELECTED, RESET_SEATCHART, GET_CHECKOUT_SUCCESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -175,6 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CITY_LIST", function() { return GET_CITY_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SEARCH_PARAMS", function() { return GET_SEARCH_PARAMS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SEARCH_SUCCESS", function() { return GET_SEARCH_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SEARCH_BUSES", function() { return UPDATE_SEARCH_BUSES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SEATCHART_SUCCESS", function() { return GET_SEATCHART_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SEAT_SELECTED", function() { return UPDATE_SEAT_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET_SEATCHART", function() { return RESET_SEATCHART; });
@@ -182,7 +183,8 @@ __webpack_require__.r(__webpack_exports__);
 // Search
 var GET_CITY_LIST = 'GET_CITY_LIST';
 var GET_SEARCH_PARAMS = 'GET_SEARCH_PARAMS';
-var GET_SEARCH_SUCCESS = 'GET_SEARCH_SUCCESS'; // Seatchart
+var GET_SEARCH_SUCCESS = 'GET_SEARCH_SUCCESS';
+var UPDATE_SEARCH_BUSES = 'UPDATE_SEARCH_BUSES'; // Seatchart
 
 var GET_SEATCHART_SUCCESS = 'GET_SEATCHART_SUCCESS';
 var UPDATE_SEAT_SELECTED = 'UPDATE_SEAT_SELECTED';
@@ -280,6 +282,17 @@ var initialState = {
   // search API results ---- as is from API
   buses: [],
   // Bus data ---- to be used for sorting & filtering ---- can be reset based on data mentioned above
+  staticData: {
+    minPrice: 0,
+    maxPrice: 10000,
+    minDepHr: 0,
+    maxDepHr: 24,
+    operators: [],
+    amenities: [],
+    pickups: [],
+    dropoffs: [],
+    coach: []
+  },
   loader: false
 };
 
@@ -301,14 +314,75 @@ var searchReducer = function searchReducer() {
       });
 
     case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SEARCH_SUCCESS"]:
+      var staticData = searchParseStaticData(action.search);
       return Object.assign({}, state, {
         data: action.search,
-        buses: action.search.Buses
+        buses: action.search.Buses,
+        staticData: staticData
+      });
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SEARCH_BUSES"]:
+      return Object.assign({}, state, {
+        buses: action.data
       });
 
     default:
       return state;
   }
+};
+
+var searchParseStaticData = function searchParseStaticData(data) {
+  var buses = data.Buses;
+  var amenArr = data.AllAmenities;
+  var coach = ['Seater / Semi-Sleeper', 'Sleeper', 'AC', 'Non AC', 'Volvo / Mercedes', 'Non Volvo'];
+  var minFare,
+      maxFare,
+      minDepHr,
+      maxDepHr,
+      pickups = [],
+      dropoffs = [],
+      operators = [],
+      amenities = [];
+  buses.forEach(function (el, index) {
+    if (index === 0) {
+      minFare = el.BusStatus.DiscFares[0];
+      maxFare = el.BusStatus.DiscFares[0];
+      minDepHr = new Date(el.DeptTime).getHours();
+      maxDepHr = new Date(el.DeptTime).getHours();
+    }
+
+    if (index > 0) {
+      minFare = el.BusStatus.DiscFares[0] < minFare ? el.BusStatus.DiscFares[0] : minFare;
+      maxFare = el.BusStatus.DiscFares[0] > maxFare ? el.BusStatus.DiscFares[0] : maxFare;
+      minDepHr = new Date(el.DeptTime).getHours() < minDepHr ? new Date(el.DeptTime).getHours() : minDepHr;
+      maxDepHr = new Date(el.DeptTime).getHours() > maxDepHr ? new Date(el.DeptTime).getHours() : maxDepHr;
+    }
+
+    el.Pickups.forEach(function (pick) {
+      return pickups.indexOf(pick.PickupName) === -1 ? pickups.push(pick.PickupName) : '';
+    });
+    el.Dropoffs.forEach(function (drop) {
+      return dropoffs.indexOf(drop.DropoffName) === -1 ? dropoffs.push(drop.DropoffName) : '';
+    });
+    el.Amenities.forEach(function (amen) {
+      return amenities.indexOf(amenArr[amen]) === -1 ? amenities.push(amenArr[amen]) : '';
+    });
+
+    if (operators.indexOf(el.CompanyName) === -1) {
+      operators.push(el.CompanyName);
+    }
+  });
+  return {
+    minPrice: minFare,
+    maxPrice: maxFare,
+    minDepHr: minDepHr,
+    maxDepHr: maxDepHr,
+    operators: operators,
+    amenities: amenities,
+    pickups: pickups,
+    dropoffs: dropoffs,
+    coach: coach
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (searchReducer);

@@ -7,7 +7,7 @@ const radio = (props) => (
                 position: relative;
                 display: flex;
                 align-items: center;
-                padding: 10px 15px;
+                padding: ${ props.padding || '10px 15px' };
                 color: ${ text1 }
             }
             .radio {

@@ -10,7 +10,9 @@ import HomeHead from '../headtag/srp'
 import Loader from '../../utilities/loader/loader'
 import Header from '../header/srp'
 import Listing from './listing'
-import Filter from '../../utilities/others/filter1'
+import FilterIco from '../../utilities/others/filter1'
+import Slider from '../slider/slider'
+import FilterScreen from './filter'
 
 class search extends React.Component {
     constructor(props) {
@@ -20,7 +22,8 @@ class search extends React.Component {
             showSearch: false,
             from: encodeURIComponent(this.props.search.from),
             to: encodeURIComponent(this.props.search.to),
-            journeyDate: this.props.search.journeyDate
+            journeyDate: this.props.search.journeyDate,
+            showFilter: false
         }
     }
 
@@ -60,7 +63,7 @@ class search extends React.Component {
         searchReq.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const searchRes = JSON.parse(searchReq.responseText).data
-                console.log(searchRes)
+                // console.log(searchRes)
                 const {dispatch} = that.props
                 dispatch(getSearchResult(searchRes))
                 that.setState({
@@ -81,14 +84,23 @@ class search extends React.Component {
                     journeyDate = { moment(this.state.journeyDate).format("ddd, DD MMM") }
                     showSearch = { this.state.showSearch }
                     onClick = { () => this.setState({ showSearch: !this.state.showSearch }) }
+                    showSort = { this.props.search.buses.length > 0 }
                 />
                 {
-                    this.props.search.buses.length > 0 && 
+                    this.props.search.buses.length > 0 &&
                     <Listing />
                 }
                 {
-                    this.props.search.buses.length > 0 && 
-                    <Filter onClick = { () => alert('Coming soon') } />
+                    this.props.search.data && this.props.search.data.Buses && this.props.search.data.Buses.length > 0 &&
+                    <FilterIco onClick = { () => this.setState({ showFilter: true }) } />
+                }
+                {
+                    this.props.search.data && this.props.search.data.Buses && this.props.search.data.Buses.length > 0 &&
+                    <Slider active = { this.state.showFilter } direction = "bottom">
+                        <FilterScreen
+                            onClose = { () => this.setState({ showFilter: false }) }
+                        />
+                    </Slider>
                 }
             </Wrapper>
         )

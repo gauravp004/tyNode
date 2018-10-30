@@ -1,5 +1,7 @@
-export const srp = {
-    sort: {
-        data: []
-    }
-}
+export const sortOrder = [
+    'Price',
+    'Arrival',
+    'Departure',
+    'Deals',
+    'Duration',
+]

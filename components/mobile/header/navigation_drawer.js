@@ -1,4 +1,4 @@
-import { white, opacity1, primary, light3 } from '../../../config/common'
+import { white, primary, light3 } from '../../../config/common'
 import { navBar } from '../../../config/mobile/home'
 import Slider from '../slider/slider'
 import Close from '../../utilities/others/close'

@@ -20,3 +20,10 @@ export function getSearchResult(search) {
         search
     };
 }
+
+export function updateSearchBuses(data) {
+    return {
+        type: types.UPDATE_SEARCH_BUSES,
+        data
+    };
+}

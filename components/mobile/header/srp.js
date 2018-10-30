@@ -70,7 +70,7 @@ export default (props) => (
             <Slider active = { props.showSearch } height = "220px">
                 <SearchPanel />
             </Slider>
-            <Sort />
+            { props.showSort ? <Sort /> : <div style = {{ padding: '5px' }}></div> }
         </div>
     </header>
 )
