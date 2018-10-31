@@ -12,7 +12,7 @@ const checkbox = (props) => (
                 width: 20px;
                 height: 20px;
                 margin-right: ${ props.right || 0 };
-                border: 1px solid ${ primary };
+                border: 1px solid ${ props.checkColor || primary };
                 border-radius: 3px;
                 background: ${ props.active ? primary : white };
                 transition: 0.3s ease;

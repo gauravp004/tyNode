@@ -72,6 +72,15 @@ class search extends React.Component {
             }
         }
     }
+
+    toggleFilter = () => {
+        if (this.state.showFilter) {
+            document.body.style = ''
+        } else {
+            document.body.style.overflow = 'hidden'
+        }
+        this.setState({ showFilter: !this.state.showFilter })
+    }
     
     render() {
         return (
@@ -92,13 +101,13 @@ class search extends React.Component {
                 }
                 {
                     this.props.search.data && this.props.search.data.Buses && this.props.search.data.Buses.length > 0 &&
-                    <FilterIco onClick = { () => this.setState({ showFilter: true }) } />
+                    <FilterIco onClick = { this.toggleFilter } />
                 }
                 {
                     this.props.search.data && this.props.search.data.Buses && this.props.search.data.Buses.length > 0 &&
                     <Slider active = { this.state.showFilter } direction = "bottom">
                         <FilterScreen
-                            onClose = { () => this.setState({ showFilter: false }) }
+                            onClose = { this.toggleFilter }
                         />
                     </Slider>
                 }

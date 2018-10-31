@@ -167,7 +167,7 @@ function (_App) {
 /*!***************************************!*\
   !*** ./redux/actions/action-types.js ***!
   \***************************************/
-/*! exports provided: GET_CITY_LIST, GET_SEARCH_PARAMS, GET_SEARCH_SUCCESS, UPDATE_SEARCH_BUSES, GET_SEATCHART_SUCCESS, UPDATE_SEAT_SELECTED, RESET_SEATCHART, GET_CHECKOUT_SUCCESS */
+/*! exports provided: GET_CITY_LIST, GET_SEARCH_PARAMS, GET_SEARCH_SUCCESS, UPDATE_SEARCH_BUSES, UPDATE_FILTER_DEP, UPDATE_FILTER_ARR, UPDATE_FILTER_PRICE, UPDATE_FILTER_OPS, UPDATE_FILTER_PICK, UPDATE_FILTER_DROP, UPDATE_FILTER_AMEN, UPDATE_FILTER_COACH, UPDATE_FILTER_DEALS, UPDATE_FILTER_MTKT, UPDATE_FILTER_RESET, GET_SEATCHART_SUCCESS, UPDATE_SEAT_SELECTED, RESET_SEATCHART, GET_CHECKOUT_SUCCESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -176,6 +176,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SEARCH_PARAMS", function() { return GET_SEARCH_PARAMS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SEARCH_SUCCESS", function() { return GET_SEARCH_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SEARCH_BUSES", function() { return UPDATE_SEARCH_BUSES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_DEP", function() { return UPDATE_FILTER_DEP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_ARR", function() { return UPDATE_FILTER_ARR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_PRICE", function() { return UPDATE_FILTER_PRICE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_OPS", function() { return UPDATE_FILTER_OPS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_PICK", function() { return UPDATE_FILTER_PICK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_DROP", function() { return UPDATE_FILTER_DROP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_AMEN", function() { return UPDATE_FILTER_AMEN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_COACH", function() { return UPDATE_FILTER_COACH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_DEALS", function() { return UPDATE_FILTER_DEALS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_MTKT", function() { return UPDATE_FILTER_MTKT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_FILTER_RESET", function() { return UPDATE_FILTER_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SEATCHART_SUCCESS", function() { return GET_SEATCHART_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SEAT_SELECTED", function() { return UPDATE_SEAT_SELECTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET_SEATCHART", function() { return RESET_SEATCHART; });
@@ -184,7 +195,18 @@ __webpack_require__.r(__webpack_exports__);
 var GET_CITY_LIST = 'GET_CITY_LIST';
 var GET_SEARCH_PARAMS = 'GET_SEARCH_PARAMS';
 var GET_SEARCH_SUCCESS = 'GET_SEARCH_SUCCESS';
-var UPDATE_SEARCH_BUSES = 'UPDATE_SEARCH_BUSES'; // Seatchart
+var UPDATE_SEARCH_BUSES = 'UPDATE_SEARCH_BUSES';
+var UPDATE_FILTER_DEP = 'UPDATE_FILTER_DEP';
+var UPDATE_FILTER_ARR = 'UPDATE_FILTER_ARR';
+var UPDATE_FILTER_PRICE = 'UPDATE_FILTER_PRICE';
+var UPDATE_FILTER_OPS = 'UPDATE_FILTER_OPS';
+var UPDATE_FILTER_PICK = 'UPDATE_FILTER_PICK';
+var UPDATE_FILTER_DROP = 'UPDATE_FILTER_DROP';
+var UPDATE_FILTER_AMEN = 'UPDATE_FILTER_AMEN';
+var UPDATE_FILTER_COACH = 'UPDATE_FILTER_COACH';
+var UPDATE_FILTER_DEALS = 'UPDATE_FILTER_DEALS';
+var UPDATE_FILTER_MTKT = 'UPDATE_FILTER_MTKT';
+var UPDATE_FILTER_RESET = 'UPDATE_FILTER_RESET'; // Seatchart
 
 var GET_SEATCHART_SUCCESS = 'GET_SEATCHART_SUCCESS';
 var UPDATE_SEAT_SELECTED = 'UPDATE_SEAT_SELECTED';
@@ -291,14 +313,35 @@ var initialState = {
     amenities: [],
     pickups: [],
     dropoffs: [],
-    coach: []
+    coach: ['Seater / Semi-Sleeper', 'Sleeper', 'AC', 'Non AC', 'Volvo / Mercedes', 'Non Volvo']
   },
+  price: {
+    min: 0,
+    max: 0
+  },
+  departure: {
+    hh: 0,
+    mm: 0
+  },
+  arrival: {
+    hh: 0,
+    mm: 0
+  },
+  operator: [],
+  amenities: [],
+  pickups: [],
+  dropoffs: [],
+  Deals: false,
+  Mticket: false,
+  coach: [],
   loader: false
 };
 
 var searchReducer = function searchReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  var currState = state,
+      buses;
 
   switch (action.type) {
     case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_CITY_LIST"]:
@@ -318,12 +361,137 @@ var searchReducer = function searchReducer() {
       return Object.assign({}, state, {
         data: action.search,
         buses: action.search.Buses,
+        price: {
+          min: staticData.minPrice,
+          max: staticData.maxPrice
+        },
         staticData: staticData
       });
 
     case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SEARCH_BUSES"]:
       return Object.assign({}, state, {
         buses: action.data
+      });
+    // Deals Filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_DEALS"]:
+      currState.Deals = !currState.Deals;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        Deals: currState.Deals,
+        buses: buses,
+        loader: true
+      });
+    // Mtkt Filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_MTKT"]:
+      currState.Mticket = !currState.Mticket;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        Mticket: currState.Mticket,
+        buses: buses,
+        loader: true
+      });
+    // Departure Filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_DEP"]:
+      currState.departure = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        departure: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Arrival filter
+    // case types.UPDATE_FILTER_ARR:
+    //     currState.arrival = action.data
+    //     buses = parseFilter(currState)
+    //     return Object.assign({}, state, {
+    //         arrival: action.data,
+    //         buses,
+    //         loader: true
+    //     })
+    // Coach filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_COACH"]:
+      currState.coach = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        coach: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Price filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_PRICE"]:
+      currState.price = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        price: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Operator filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_OPS"]:
+      currState.operator = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        operator: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Amen filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_AMEN"]:
+      currState.amenities = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        amenities: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Pickup filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_PICK"]:
+      currState.pickups = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        pickups: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Drop filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_DROP"]:
+      currState.dropoffs = action.data;
+      buses = parseFilter(currState);
+      return Object.assign({}, state, {
+        dropoffs: action.data,
+        buses: buses,
+        loader: true
+      });
+    // Reset filter
+
+    case _actions_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_FILTER_RESET"]:
+      return Object.assign({}, state, {
+        price: {
+          min: state.staticData.minPrice,
+          max: state.staticData.maxPrice
+        },
+        departure: {
+          hh: 0,
+          mm: 0
+        },
+        // arrival: { hh: 0, mm: 0 },
+        operator: [],
+        amenities: [],
+        pickups: [],
+        dropoffs: [],
+        deals: false,
+        mTkt: false,
+        coach: [],
+        loader: true
       });
 
     default:
@@ -383,6 +551,207 @@ var searchParseStaticData = function searchParseStaticData(data) {
     dropoffs: dropoffs,
     coach: coach
   };
+};
+
+var parseFilter = function parseFilter(st) {
+  var loop = st.data.Buses;
+  var buses = [];
+
+  for (var i = 0; i < loop.length; i++) {
+    var val = dealFilter(loop[i], st.Deals) && mTktFilter(loop[i], st.Mticket) && depFilter(loop[i], st.departure) && // arrFilter(loop[i], st.arrival) &&
+    coachType(loop[i], st.coach, st.staticData.coach) && priceFilter(loop[i], st.price, st.staticData.minPrice, st.staticData.maxPrice) && opsFilter(loop[i], st.operator) && amenFilter(loop[i], st.amenities, st.data.AllAmenities) && pickFilter(loop[i], st.pickups) && dropFilter(loop[i], st.dropoffs);
+
+    if (val) {
+      buses.push(loop[i]);
+    }
+  }
+
+  if (st.deals) {
+    buses = buses.sort(function (a, b) {
+      return a.DiscountPct < b.DiscountPct ? 1 : b.DiscountPct < a.DiscountPct ? -1 : 0;
+    });
+  }
+
+  return buses;
+};
+
+var dealFilter = function dealFilter(el, val) {
+  if (val) {
+    if (parseInt(el.BusStatus.BaseFares[1], 10) - parseInt(el.BusStatus.DiscFares[0], 10)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var mTktFilter = function mTktFilter(el, val) {
+  if (val) {
+    return el.MTicket;
+  }
+
+  return true;
+};
+
+var depFilter = function depFilter(el, val) {
+  if (val.hh > 0 || val.mm > 0) {
+    var temp = new Date(el.DeptTime);
+
+    if (temp.getHours() > val.hh || temp.getHours() === val.hh && temp.getMinutes() >= val.mm) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+}; // const arrFilter = (el, val) => {
+//     if (val.hh > 0 || val.mm > 0) {
+//         const temp = new Date(el.ArrTime)
+//         if (temp.getHours() < val.hh || (temp.getHours() === val.hh && temp.getMinutes() <= val.mm)) {
+//             return true
+//         } else {
+//             return false
+//         }
+//     }
+//     return true
+// }
+
+
+var coachType = function coachType(el, val, loop) {
+  if (val.length > 0) {
+    var chkSeater = val.indexOf(loop[0]) >= 0 && val.indexOf(loop[1]) >= 0 || val.indexOf(loop[0]) === -1 && val.indexOf(loop[1]) === -1 ? true : checkSeater(el, val, loop);
+    var chkAC = val.indexOf(loop[2]) >= 0 && val.indexOf(loop[3]) >= 0 || val.indexOf(loop[2]) === -1 && val.indexOf(loop[3]) === -1 ? true : checkAC(el, val, loop);
+    var chkVolvo = val.indexOf(loop[4]) >= 0 && val.indexOf(loop[5]) >= 0 || val.indexOf(loop[4]) === -1 && val.indexOf(loop[5]) === -1 ? true : checkVolvo(el, val, loop);
+
+    if (chkSeater && chkAC && chkVolvo) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var checkSeater = function checkSeater(el, val, loop) {
+  var seater = el.BusType.Seating.toLowerCase() === 'seater' || el.BusType.Seating.toLowerCase() === 'semi_sleeper' || el.BusType.Seating.toLowerCase() === 'seater_semi_sleeper';
+
+  if (val.indexOf(loop[0]) >= 0) {
+    return seater;
+  } else {
+    return !seater;
+  }
+};
+
+var checkAC = function checkAC(el, val, loop) {
+  var ac = el.BusType.IsAC.toLowerCase() === 'ac';
+
+  if (val.indexOf(loop[2]) >= 0) {
+    return ac;
+  } else {
+    return !ac;
+  }
+};
+
+var checkVolvo = function checkVolvo(el, val, loop) {
+  var volvo = el.BusType.Make.toLowerCase() === 'volvo' || el.BusType.Make.toLowerCase() === 'mercedes';
+
+  if (val.indexOf(loop[4]) >= 0) {
+    return volvo;
+  } else {
+    return !volvo;
+  }
+};
+
+var priceFilter = function priceFilter(el, val, min, max) {
+  if (val.min > min || val.max < max) {
+    var temp = el.BusStatus.DiscFares[0];
+
+    if (temp >= val.min && temp <= val.max) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var opsFilter = function opsFilter(el, val) {
+  if (val.length > 0) {
+    if (val.indexOf(el.CompanyName) >= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var amenFilter = function amenFilter(el, val, amenArr) {
+  if (val.length > 0) {
+    var isAmen = false;
+
+    if (el.Amenities.length > 0) {
+      var amenName = [];
+      el.Amenities.forEach(function (ell) {
+        amenName.push(amenArr[ell]);
+      });
+      val.forEach(function (vall, index) {
+        isAmen = index === 0 && amenName.indexOf(vall) >= 0 ? true : amenName.indexOf(vall) >= 0 ? isAmen && true : false;
+      });
+    }
+
+    if (isAmen) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var pickFilter = function pickFilter(el, val) {
+  if (val.length > 0) {
+    var isPick = false;
+    el.Pickups.forEach(function (ell) {
+      if (val.indexOf(ell.PickupName) >= 0) {
+        isPick = true;
+      }
+    });
+
+    if (isPick) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+var dropFilter = function dropFilter(el, val) {
+  if (val.length > 0) {
+    var isDrop = false;
+    el.Dropoffs.forEach(function (ell) {
+      if (val.indexOf(ell.DropoffName) >= 0) {
+        isDrop = true;
+      }
+    });
+
+    if (isDrop) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (searchReducer);
