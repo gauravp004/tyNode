@@ -31,6 +31,7 @@ class searchPanel extends React.Component {
         if (this.props.search.cityList.length === 0) {
             this.getCityList()
         }
+        console.log(this.props)
     }
 
     getCityList = () => {
@@ -172,7 +173,7 @@ class searchPanel extends React.Component {
                 </Slider>
                 <Slider active = { this.state.departActive } direction = "bottom">
                     {
-                        this.state.departActive &&
+                        this.props.search.cityList.length > 0 &&
                         <Datepicker
                             from = { this.state.fromCity }
                             to = { this.state.toCity }

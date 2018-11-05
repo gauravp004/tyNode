@@ -1,4 +1,4 @@
-const $gds = 'EAE22012F079CEF30608B8DB8CD575C7|333-S|201811010947|mobile 465b9f878461420|FFFF'
+const $gds = 'B2596FEE59103F55D10A62FEC8D277A6|333-S|201811060829|mobile 465b9f878461420|FFFF'
 
 export function httprequest_get(url, isGds=false) {
     var xhttp = new XMLHttpRequest();
